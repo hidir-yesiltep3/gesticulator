@@ -25,6 +25,7 @@ class SpeechGestureDataset(Dataset):
         if train:
             self.audio = np.load(path.join(root_dir, 'X_train.npy')).astype(np.float32)
             self.text = np.load(path.join(root_dir, 'T_train.npy')).astype(np.float32)
+            self.gest_exist = np.load(path.join(root_dir, 'Z_train.npy')).astype(np.float32)
             # apply PCA
             if apply_PCA:
                 self.gesture = np.load(path.join(root_dir, 'PCA', 'Y_train.npy')).astype(np.float32)
@@ -33,6 +34,7 @@ class SpeechGestureDataset(Dataset):
         else:
             self.audio = np.load(path.join(root_dir, 'X_dev.npy')).astype(np.float32)
             self.text = np.load(path.join(root_dir, 'T_dev.npy')).astype(np.float32)
+            self.gest_exist = np.load(path.join(root_dir, 'Z_train.npy')).astype(np.float32)
             # apply PCA
             if apply_PCA:
                 self.gesture = np.load(path.join(root_dir, 'PCA', 'Y_dev.npy')).astype(np.float32)
@@ -53,8 +55,9 @@ class SpeechGestureDataset(Dataset):
         audio = self.audio[idx]
         gesture = self.gesture[idx]
         text = self.text[idx]
+        gest_exist = self.gest_exist[idx]
 
-        sample = {'audio': audio, 'output': gesture, 'text': text}
+        sample = {'audio': audio, 'output': gesture, 'text': text, 'gesture_exist': gest_exist}
 
         return sample
 
@@ -73,6 +76,7 @@ class ValidationDataset(Dataset):
         # Get the data
         self.audio = np.load(path.join(root_dir, 'dev_inputs', 'X_dev_NaturalTalking_001.npy')).astype(np.float32)
         self.text = np.load(path.join(root_dir, 'dev_inputs', 'T_dev_NaturalTalking_001.npy')).astype(np.float32)
+        self.gest_exist = np.load(path.join(root_dir, 'dev_inputs', 'Z_dev_NaturalTalking_001.npy')).astype(np.float32)
         # upsample text to get the same sampling rate as the audio
         cols = np.linspace(0, self.text.shape[0], endpoint=False, num=self.text.shape[0]*2, dtype=int)
         self.text = self.text[cols,:]
@@ -93,7 +97,7 @@ class ValidationDataset(Dataset):
         end = int(self.end_times[idx] * 20)  # 20fps
         audio = self.audio[start-self.past_context : end+self.future_context]
         text = self.text[start-self.past_context : end+self.future_context]
-
-        sample = {'audio': audio, 'text': text}
+        gest_exist = self.gest_exist[start-self.past_context : end+self.future_context]
+        sample = {'audio': audio, 'text': text, 'gesture_exist': gest_exist}
 
         return sample
