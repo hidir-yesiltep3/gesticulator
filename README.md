@@ -127,7 +127,7 @@ ___
 ## What is New ? 
 - This repository is the conditioned version of Gesticulator. 
 - We used binary vectors associated with gesture existance to condition the model. 
-- Gesture existance vectors are saved in both `_save_data_as_sequences()` and `_save_dataset()` functions.
+- Gesture existance vectors are saved in both `_save_data_as_sequences()` and `_save_dataset()` functions located at `gesticulator/data_processing/process_dataset.py`.
 - Gesture existance vectors are loaded and processed in `_encode_vectors()` function located at ```gesticulator/data_processing/process_dataset.py```.
 
 ### Modifications to `_encode_vectors()`
