@@ -127,10 +127,11 @@ ___
 ## What is New ? 
 - This repository is the conditioned version of Gesticulator. 
 - We used binary vectors associated with gesture existance to condition the model. 
-
-Gesture existance vectors are loaded and processed in `_encode_vectors` function located at ```gesticulator/data_processing/process_dataset.py```.
-
-## Citing
+-Gesture existance vectors are loaded and processed in `_encode_vectors()` function located at ```gesticulator/data_processing/process_dataset.py```.
+### Changes in `_encode_vectors()`
+- 2 extra parameters are given to this function: `gesture_file_name` and `gesture_exist_file_path`. `gesture_file_name` is in new dataformat (They are HDF5 group files rather than BVH files). `gesture_exist_file_path` is the file path with binary gesture existance indicators of type [[seconds, is_gesture_existed]].
+- There are 5 main preprocess step in `_encode_vectors()` function, 5th processing corresponds to the alignment of the binary gesture indicators frame by frame.
+ ## Citing
 
 If you use this code in your research please cite it:
 ```
