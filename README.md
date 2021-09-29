@@ -123,6 +123,13 @@ For nice visualization you can use the following repository: https://github.com/
 
 For the quantitative evaluation (velocity histograms and jerk), you may use the scripts in the `gesticulator/obj_evaluation` folder.
 
+___
+## What is New ? 
+- This repository is the conditioned version of Gesticulator. 
+- We used binary vectors associated with gesture existance to condition the model. 
+
+Gesture existance vectors are loaded and processed in `_encode_vectors` function located at ```gesticulator/data_processing/process_dataset.py```.
+
 ## Citing
 
 If you use this code in your research please cite it:
