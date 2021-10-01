@@ -135,9 +135,9 @@ ___
 - There are 5 main preprocess step in `_encode_vectors()` function, 5th processing corresponds to the alignment of the binary gesture indicators frame by frame.
 
 ### Extra Added Functions
-1.) `_get_frankmocap_upper_body_idxs()`: 
+`_get_frankmocap_upper_body_idxs()`: 
 - This function will be used for getting only upper body indexes while rendering the visualization.
-- TODO: `FRANKMOCAP_JOINT_NAMES` must be added to the tools.py located at `gesticulator/data_processing/tools.py`.
+- Missing Parts: `FRANKMOCAP_JOINT_NAMES` must be added to the tools.py located at `gesticulator/data_processing/tools.py`. Also, this function is not being called right now.
 
 ## Citing
 If you use this code in your research please cite it:
